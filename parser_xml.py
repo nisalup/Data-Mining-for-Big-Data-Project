@@ -20,7 +20,6 @@ def data_cleaning():
 		if not e.text:
 			tokenized_collection.append([])
 		else:
-			print(file_name)
 			xml_text = word_tokenize(e.text)
 			xml_text_stop = []
 
@@ -42,9 +41,42 @@ def data_cleaning():
 
 			#remove words with length lesser than 3
 			xml_text_stop_fin = [word for word in xml_text_stop_fin if len(word) >= 3]
-			print(xml_text_stop_fin)
+
+			#remove duplicates
+			xml_text_stop_cleaned = list(set(xml_text_stop_fin))
+
+			#remove numbers and add hasNum feature
+			for index, w in enumerate(xml_text_stop_cleaned):
+				if str(w).isdigit():
+					del xml_text_stop_cleaned[index]
+					if 'hasNum' not in xml_text_stop_cleaned:
+						xml_text_stop_cleaned.append('hasNum')
 
 
-	return tokenized_collection
+			#print(xml_text_stop_fin)
+			tokenized_collection.append(xml_text_stop_cleaned)
 
-#data_cleaning()
+	#remove features that are mentioned less than 5 times in the dataset
+	#create feature set
+	feature_set = set()
+	for item in tokenized_collection:
+		for w in item:
+			if w not in feature_set:
+				feature_set.add(w)
+	#lookup frequencies of occurences
+	for feature in feature_set.copy():
+		feature_count = 0
+		for tokenized_collection_item in tokenized_collection:
+			feature_count += tokenized_collection_item.count(feature)
+		if feature_count < 5:
+			for tokenized_collection_item_second in tokenized_collection:
+				while feature in tokenized_collection_item_second: tokenized_collection_item_second.remove(feature)
+			feature_set.remove(feature)
+
+
+	print(len(feature_set))
+
+	#print(tokenized_collection)
+	return feature_set, tokenized_collection
+
+data_cleaning()
