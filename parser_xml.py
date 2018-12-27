@@ -79,4 +79,4 @@ def data_cleaning():
 	#print(tokenized_collection)
 	return feature_set, tokenized_collection
 
-data_cleaning()
+#data_cleaning()
