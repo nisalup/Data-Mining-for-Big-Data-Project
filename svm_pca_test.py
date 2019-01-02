@@ -28,7 +28,8 @@ plt.title('Variance Change with Number of Components')
 plt.show()
 
 #since it shows from the graph that we can reduce the dimensionality, we will try this with PCA
-pca_scaled = PCA(n_components=2)
+# n_components=2 -> precision=0.85, n_components=14 -> precision=0.94
+pca_scaled = PCA(n_components=14)
 pca_scaled.fit(X)
 X = pca_scaled.transform(X)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
