@@ -20,7 +20,7 @@ scaler = MinMaxScaler(feature_range=[0, 1])
 data_rescaled = scaler.fit_transform(X)
 pca = PCA().fit(data_rescaled)
 
-plt.figure()
+plt.figure(0)
 plt.plot(np.cumsum(pca.explained_variance_ratio_))
 plt.xlabel('Number of Components')
 plt.ylabel('Variance (%)') #for each component

@@ -13,12 +13,6 @@ y_train = np.loadtxt("train_modified_labels.txt", delimiter=",")
 #get testing data
 X_test = np.loadtxt("test_modified.txt", delimiter=",")
 
-#we use SVC with linear kernel as before
-#svclassifier = SVC(kernel='linear')
-#svclassifier.fit(X_train, y_train)
-
-#y_pred = svclassifier.predict(X_test)
-
 #we use sklearn.naive_bayes.MultinomialNB estimator:
 model_multinomialDB = MultinomialNB()
 model_multinomialDB.fit(X_train, y_train)
