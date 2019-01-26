@@ -1,6 +1,10 @@
 from parser_xml import *
 import pandas as pd
 import numpy as np
+#import nltk
+#nltk.download('punkt')
+#nltk.download('stopwords')
+
 """[Preprocessing]
 
 [here we get the list of cleaned words from parser.py and turn them into features using one hot encoding]
